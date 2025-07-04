@@ -1,0 +1,128 @@
+rest_num = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+rest1 = "McDonald's"
+trait1 = ["Fast food", "Burgers", "Fries", "Drive-thru", "Affordable", "Breakfast menu"]
+
+rest2 = "Burger King"
+trait2 = ["Fast Food", "Flame-grilled", "Burgers", "Onion rings", "Kids meals", "Drive-thru", "Affordable"]
+
+rest3 = "KFC"
+trait3 = ["Fast Food", "Fried chicken", "Biscuits", "Mashed potatoes", "Buckets", "Coleslaw", "Drive-thru"]
+
+rest4 = "Pizza Hut"
+trait4 = ["Fast Food", "Pizza", "Pasta", "Wings", "Dine-in", "Delivery", "Stuffed crust", "Breadsticks"]
+
+rest5 = "Subway"
+trait5 = ["Sandwiches", "Customizable", "Fresh veggies", "Subs", "Salads", "Healthy options"]
+
+rest6 = "Taco Bell"
+trait6 = ["Mexican-inspired", "Tacos", "Burritos", "Quesadillas", "Value menu", "Late night"]
+
+rest7 = "Wendy's"
+trait7 = ["Fresh beef", "Square burgers", "Frosty", "Salads", "Baked potatoes", "Drive-thru"]
+
+rest8 = "Domino's"
+trait8 = ["Pizza", "Delivery", "Carryout", "Breadsticks", "Chicken", "Online ordering"]
+
+rest9 = "Chipotle"
+trait9 = ["Burritos", "Bowls", "Fresh ingredients", "Customizable", "Guacamole", "Mexican grill"]
+
+# Group all trait lists into a list of lists for easy access by trait index
+all_traits = sorted(set(
+    trait1 + trait2 + trait3 + trait4 + trait5 + trait6 + trait7 + trait8 + trait9
+))
+
+# Dynamically collect all restaurant variables that start with 'rest' and are strings
+what_yes = [v for k, v in globals().items() if k.startswith('rest') and isinstance(v, str)]
+trait_which = 0
+print("Ready to eat you indecisive bag? Let's find you a restaurant!")
+
+def getdata():
+    global trait_which
+    while trait_which < len(all_traits) and len(what_yes) > 1:
+        user_input = input(f"How does {all_traits[trait_which]} sound? (y/n) ")
+        filter_restaurants(trait_which, user_input)
+        trait_which += 1
+        sleep(1)  # Adding a delay for better user experience
+
+from time import sleep
+
+def filter_restaurants(trait_which, user_input):
+    trait = all_traits[trait_which]
+    # Use a list to avoid modifying what_yes while iterating
+    to_remove = []
+    if user_input == 'n' or user_input == 'N':
+        if rest1 in what_yes and trait in trait1:
+            print(f"Filtering out {rest1} as it has the trait {trait}.")
+            to_remove.append(rest1)
+        if rest2 in what_yes and trait in trait2:
+            print(f"Filtering out {rest2} as it has the trait {trait}.")
+            to_remove.append(rest2)
+        if rest3 in what_yes and trait in trait3:
+            print(f"Filtering out {rest3} as it has the trait {trait}.")
+            to_remove.append(rest3)
+        if rest4 in what_yes and trait in trait4:
+            print(f"Filtering out {rest4} as it has the trait {trait}.")
+            to_remove.append(rest4)
+        if rest5 in what_yes and trait in trait5:
+            print(f"Filtering out {rest5} as it has the trait {trait}.")
+            to_remove.append(rest5)
+        if rest6 in what_yes and trait in trait6:
+            print(f"Filtering out {rest6} as it has the trait {trait}.")
+            to_remove.append(rest6)
+        if rest7 in what_yes and trait in trait7:
+            print(f"Filtering out {rest7} as it has the trait {trait}.")
+            to_remove.append(rest7)
+        if rest8 in what_yes and trait in trait8:
+            print(f"Filtering out {rest8} as it has the trait {trait}.")
+            to_remove.append(rest8)
+        if rest9 in what_yes and trait in trait9:
+            print(f"Filtering out {rest9} as it has the trait {trait}.")
+            to_remove.append(rest9)
+    elif user_input == 'y' or user_input == 'Y':
+        if rest1 in what_yes and trait not in trait1:
+            print(f"Filtering out {rest1} as it has not the trait {trait}.")
+            to_remove.append(rest1)
+        if rest2 in what_yes and trait not in trait2:
+            print(f"Filtering out {rest2} as it has not the trait {trait}.")
+            to_remove.append(rest2)
+        if rest3 in what_yes and trait not in trait3:
+            print(f"Filtering out {rest3} as it has not the trait {trait}.")
+            to_remove.append(rest3)
+        if rest4 in what_yes and trait not in trait4:
+            print(f"Filtering out {rest4} as it has not the trait {trait}.")
+            to_remove.append(rest4)
+        if rest5 in what_yes and trait not in trait5:
+            print(f"Filtering out {rest5} as it has not the trait {trait}.")
+            to_remove.append(rest5)
+        if rest6 in what_yes and trait not in trait6:
+            print(f"Filtering out {rest6} as it has not the trait {trait}.")
+            to_remove.append(rest6)
+        if rest7 in what_yes and trait not in trait7:
+            print(f"Filtering out {rest7} as it has not the trait {trait}.")
+            to_remove.append(rest7)
+        if rest8 in what_yes and trait not in trait8:
+            print(f"Filtering out {rest8} as it has not the trait {trait}.")
+            to_remove.append(rest8)
+        if rest9 in what_yes and trait not in trait9:
+            print(f"Filtering out {rest9} as it has not the trait {trait}.")
+            to_remove.append(rest9)
+    else:
+        print("No restaurants were filtered out.")
+
+    for r in to_remove:
+        if r in what_yes:
+            what_yes.remove(r)
+
+    if len(what_yes) == 1:
+        print(f"Great choice! We recommend {what_yes[0]} for you.")
+    elif len(what_yes) == 0:
+        print("Sorry, we couldn't find a suitable restaurant.")
+        restart = input("Would you like to start over? (y/n)")
+        if restart.lower() == 'y':
+            # Rebuild what_yes dynamically as at the start
+            what_yes[:] = [v for k, v in globals().items() if k.startswith('rest') and isinstance(v, str)]
+            trait_which = 0
+            getdata()
+getdata()
+
+print("Thank you for using the restaurant finder! Enjoy your meal!")
