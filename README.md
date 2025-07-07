@@ -2,7 +2,7 @@
 # porc.annotated.txt = main script + commentary/explanation
 
 steps:
-1. get preference
+1. get user preference
 2. check for incomplient
 3. remove
 4. repeat
